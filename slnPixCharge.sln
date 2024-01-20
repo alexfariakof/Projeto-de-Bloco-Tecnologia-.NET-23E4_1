@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixCharge.Domain", "PixCharge.Domain\PixCharge.Domain.csproj", "{3A996646-E965-459F-B33C-0802C755B759}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixCharge.Repository", "PixCharge.Repository\PixCharge.Repository.csproj", "{BD99D8A6-87C3-418D-84CA-102F55394E20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixCharge.Infrastructure", "PixCharge.Infrastructure\PixCharge.Infrastructure.csproj", "{D1110720-9FB6-4EA5-BE51-4C6B92B43617}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixCharge.Test", "PixCharge.Test\PixCharge.Test.csproj", "{077AAB3F-87E8-4194-BB4C-D0B7366A186B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixCharge.SPA", "PixCharge.SPA\PixCharge.SPA.csproj", "{D4BD980D-E74F-48D0-BD6A-BD2AA9AC9158}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "PixCharge.AngularApp", "PixCharge.SPA\angularapp\PixCharge.AngularApp.esproj", "{36CAC576-9293-4B6E-8354-427FD3FC14D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A996646-E965-459F-B33C-0802C755B759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A996646-E965-459F-B33C-0802C755B759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A996646-E965-459F-B33C-0802C755B759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A996646-E965-459F-B33C-0802C755B759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD99D8A6-87C3-418D-84CA-102F55394E20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD99D8A6-87C3-418D-84CA-102F55394E20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD99D8A6-87C3-418D-84CA-102F55394E20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD99D8A6-87C3-418D-84CA-102F55394E20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1110720-9FB6-4EA5-BE51-4C6B92B43617}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1110720-9FB6-4EA5-BE51-4C6B92B43617}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1110720-9FB6-4EA5-BE51-4C6B92B43617}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1110720-9FB6-4EA5-BE51-4C6B92B43617}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077AAB3F-87E8-4194-BB4C-D0B7366A186B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077AAB3F-87E8-4194-BB4C-D0B7366A186B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077AAB3F-87E8-4194-BB4C-D0B7366A186B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077AAB3F-87E8-4194-BB4C-D0B7366A186B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4BD980D-E74F-48D0-BD6A-BD2AA9AC9158}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4BD980D-E74F-48D0-BD6A-BD2AA9AC9158}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4BD980D-E74F-48D0-BD6A-BD2AA9AC9158}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4BD980D-E74F-48D0-BD6A-BD2AA9AC9158}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36CAC576-9293-4B6E-8354-427FD3FC14D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36CAC576-9293-4B6E-8354-427FD3FC14D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36CAC576-9293-4B6E-8354-427FD3FC14D3}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{36CAC576-9293-4B6E-8354-427FD3FC14D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36CAC576-9293-4B6E-8354-427FD3FC14D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36CAC576-9293-4B6E-8354-427FD3FC14D3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A6744D0-A398-41DE-B86F-54798E02160B}
+	EndGlobalSection
+EndGlobal
