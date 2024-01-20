@@ -1,4 +1,6 @@
-﻿namespace PixCharge.Domain.Core.ValueObject;
+﻿using System.Globalization;
+
+namespace PixCharge.Domain.Core.ValueObject;
 public record Monetary
 {
     public decimal Value { get; set; }
@@ -14,6 +16,6 @@ public record Monetary
     }    
     public string Formatted_ptBr()
     {
-        return $"R$ {Value.ToString("N2")}";
+        return $"R$ {Value.ToString("N2", new CultureInfo("pt-BR"))}";
     }
 }
