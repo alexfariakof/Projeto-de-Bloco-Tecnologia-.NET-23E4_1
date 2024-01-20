@@ -37,7 +37,7 @@ jobs:
         dotnet-version: 7.0.x
     
     - name: Build and Restore App 
-      run: dotnet build  ./HomeBrokerSPA/HomeBrokerSPA.csproj --restore
+      run: dotnet build  ./PixCharge.SPA/PixCharge.SPA.csproj --restore
       continue-on-error: false
 
   build_and_test_angular:
@@ -50,12 +50,12 @@ jobs:
           fetch-depth: 0
 
       - name: Test .Net App
-        run: dotnet test ./HomeBrokerXUnit/HomeBrokerXUnit.csproj
+        run: dotnet test ./PixCharge.SPA/PixCharge.SPA.csproj
         continue-on-error: false
 
       - name: Install Angular dependencies
         run: |
-          cd HomeBrokerSPA/HomeBrokerChart
+          cd PixCharge.SPA/angularapp
           npm install npm@latest > /dev/null 2>&1
           npm install -g @angular/cli > /dev/null 2>&1
           npm install
@@ -63,18 +63,18 @@ jobs:
     
       - name: Build Angular App
         run: |
-            cd HomeBrokerSPA/HomeBrokerChart
+            cd PixCharge.SPA/angularapp
             npm run build
         continue-on-error: false
 
       - name: Test Angular App
         run: |
-          cd HomeBrokerSPA/HomeBrokerChart
+          cd PixCharge.SPA/angularapp
           npm run test:coverage
         continue-on-error: false
 
   trigger_tests_sonarcloud:
     needs: build_and_test_angular
     name: Triggered Build and Test
-    uses: alexfariakof/Home_Broker_Chart/.github/workflows/test_analyse_in_Sonar_Cloud.yml@main
+    uses: alexfariakof/Projeto-de-Bloco-Tecnologia-.NET-23E4_1/.github/workflows/test_analyse_in_Sonar_Cloud.yml@main
     secrets: inherit
