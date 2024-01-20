@@ -1,3 +1,4 @@
+cls
 # Função para matar processos com base no nome do processo que estajam em execução 
 function Stop-ProcessesByName {
     $processes = Get-Process | Where-Object { $_.ProcessName -like 'dotnet*' } | Where-Object { $_.MainWindowTitle -eq '' }
@@ -19,9 +20,9 @@ if (Test-Path $reportPath) {
 }
 
 # Executa o teste e coleta o GUID gerado
-dotnet clean
-dotnet build --restore
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
+dotnet clean slnPixCharge.sln > $null 2>&1
+dotnet test ./PixCharge.Test/PixCharge.Test.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
+
 
 # Encontra o diretório mais recente na pasta TestResults
 $latestDir = Get-ChildItem -Directory -Path .\PixCharge.Test\TestResults | Sort-Object LastWriteTime -Descending | Select-Object -First 1

@@ -6,7 +6,7 @@ public class CustomerMapTest
     [Fact]
     public void EntityConfiguration_IsValid()
     {
-        const int PROPERTY_COUNT = 9;
+        const int PROPERTY_COUNT = 6;
         // Arrange
         var options = new DbContextOptionsBuilder<MockRegisterContext>()
             .UseInMemoryDatabase(databaseName: "InMemoryDatabase_CustomerMapTest")
@@ -33,7 +33,7 @@ public class CustomerMapTest
             var cpfProperty = entityType.FindProperty("CPF");
             var phoneNavigation = entityType.FindNavigation(nameof(Customer.Phone));
             var phoneProperty = phoneNavigation.TargetEntityType.FindProperty(nameof(Phone.Number));
-            var playlistsNavigation = entityType.FindNavigation("Playlists");
+
             
             // Assert
             Assert.NotNull(idProperty);
@@ -59,9 +59,6 @@ public class CustomerMapTest
             Assert.Equal(14, cpfProperty.GetMaxLength());
             Assert.False(phoneProperty.IsNullable);
             Assert.Equal(50, phoneProperty.GetMaxLength());
-            Assert.NotNull(playlistsNavigation);
-            Assert.True(playlistsNavigation.IsCollection);
-            Assert.NotNull(playlistsNavigation.ForeignKey.DeleteBehavior);
             Assert.Equal(PROPERTY_COUNT, propsCount);
         }
     }

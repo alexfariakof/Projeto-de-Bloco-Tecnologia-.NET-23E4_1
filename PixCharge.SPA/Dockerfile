@@ -17,5 +17,5 @@ RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-COPY --from=build /app/publish .
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "PixCharge.SPA.dll"]
