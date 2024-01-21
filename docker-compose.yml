@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  pixcharge.spa:
-    image: ${DOCKER_REGISTRY-}pixcharge.spa
+  pixchargespa:
+    image: ${DOCKER_REGISTRY-}pixchargespa
     build:
       context: .
       dockerfile: PixCharge.SPA/Dockerfile

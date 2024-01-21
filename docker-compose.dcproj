@@ -6,7 +6,7 @@
     <ProjectGuid>fd36f6a3-c0b9-4167-a26d-72a04c7d0b20</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
-    <DockerServiceName>pixcharge.spa</DockerServiceName>
+    <DockerServiceName>pixchargespa</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.dev.yml" />
