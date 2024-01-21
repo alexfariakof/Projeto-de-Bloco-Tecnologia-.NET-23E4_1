@@ -16,7 +16,7 @@ public class TransactionMap : IEntityTypeConfiguration<Transaction>
 
         builder.HasOne(x => x.Customer)
                .WithMany(cb => cb.Transactions)
-               .HasForeignKey(x => x.Id)
+               .HasForeignKey(x => x.CorrelationId)
                .IsRequired();
 
         builder.OwnsOne<Monetary>(d => d.Value, c =>
