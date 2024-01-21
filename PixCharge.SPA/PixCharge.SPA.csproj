@@ -37,7 +37,7 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
   </Target>
 
-  <Target Name="DebugEnsureNodeEnv" AfterTargets="Build" Condition=" '$(Configuration)' == 'Debug' And Exists('$(SpaRoot)node_modules') ">
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And Exists('$(SpaRoot)node_modules') ">
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
   </Target>
 
