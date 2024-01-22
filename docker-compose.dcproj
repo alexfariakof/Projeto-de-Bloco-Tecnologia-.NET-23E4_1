@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.1</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>fd36f6a3-c0b9-4167-a26d-72a04c7d0b20</ProjectGuid>
+    <ProjectGuid>fe503b66-9f26-41e0-b3de-f58e784bb4a1</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}</DockerServiceUrl>
     <DockerServiceName>pixchargespa</DockerServiceName>

@@ -6,7 +6,7 @@ public class TransactionMapTest
     [Fact]
     public void EntityConfiguration_IsValid()
     {
-        const int PROPERTY_COUNT = 5;           
+        const int PROPERTY_COUNT = 6;           
 
         // Arrange
         var options = new DbContextOptionsBuilder<MockRegisterContext>()
@@ -44,7 +44,7 @@ public class TransactionMapTest
             Assert.False(customerNavigation.IsCollection);
             Assert.NotNull(customerNavigation.ForeignKey);
             Assert.True(customerNavigation.ForeignKey.IsRequired);
-            Assert.Equal("Id", customerNavigation.ForeignKey.Properties.First().Name);
+            Assert.Equal("CorrelationId", customerNavigation.ForeignKey.Properties.First().Name);
             Assert.False(monetaryValueProperty.IsNullable);
             Assert.Equal(PROPERTY_COUNT, propsCount);
         }

@@ -1,3 +1,5 @@
+using PixCharge.Infrastructure.DependenceInject;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors(c =>
@@ -11,6 +13,8 @@ builder.Services.AddCors(c =>
     });
 });
 
+builder.Services.CreateDataBaseMySqlServer(builder.Configuration);
+builder.Services.CreateDataBaseMsSqlServer(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();

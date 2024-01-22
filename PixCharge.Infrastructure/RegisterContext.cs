@@ -14,5 +14,6 @@ public class RegisterContext: DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.ApplyConfiguration(new CustomerMap());
         modelBuilder.ApplyConfiguration(new TransactionMap());
+        modelBuilder.ApplyConfiguration(new ChargeMap());
     }
 }
