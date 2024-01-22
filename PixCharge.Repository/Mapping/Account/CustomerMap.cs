@@ -26,7 +26,10 @@ public class CustomerMap : IEntityTypeConfiguration<Customer>
         {
            c.Property(x => x.Email).HasColumnName("Email").HasMaxLength(150).IsRequired();
             c.Property(x => x.Password).HasColumnName("Password").HasMaxLength(255).IsRequired();
-        });       
+        });
+
+        builder.HasMany(x => x.Charges).WithOne(c => c.Customer);
+        builder.HasMany(x => x.Transactions).WithOne(x => x.Customer);
 
     }
 }

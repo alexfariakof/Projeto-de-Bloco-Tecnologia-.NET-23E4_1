@@ -26,7 +26,7 @@
       },
       "publishAllPorts": true,
       "useSSL": true,
-      "DockerfileRunArguments": "-v \"{ProjectDir}/PixCharge.SPA/angularapp/dist:/app/wwwroot\""
+      "DockerfileRunArguments": "-v \"{ProjectDir}\\angularapp\\dist:/app/wwwroot\""
     }
   },
   "iisSettings": {

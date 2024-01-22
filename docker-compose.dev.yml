@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-  homebrokerspa-dev:
+  pixchargespa-dev:
     container_name: dev
     image: alexfariakof/pix-charge-dev-img
     build:
