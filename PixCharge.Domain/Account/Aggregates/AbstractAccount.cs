@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 using PixCharge.Domain.Account.ValueObject;
-using PixCharge.Domain.Core.Aggreggates;
+using PixCharge.Domain.Core.Aggregates;
 
-namespace PixCharge.Domain.Account.Aggegrates;
+namespace PixCharge.Domain.Account.Aggregates;
 public abstract class AbstractAccount<T> : BaseModel
 {
     public string Name { get; set; }

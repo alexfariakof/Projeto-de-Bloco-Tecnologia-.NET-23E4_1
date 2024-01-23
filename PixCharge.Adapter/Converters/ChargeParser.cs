@@ -1,4 +1,4 @@
-﻿using PixCharge.Domain.Transactions.Aggreggates;
+﻿using PixCharge.Domain.Transactions.Aggregates;
 
 namespace PixCharge.Adapter.Converters;
 public class ChargeParser : IParser<Charge, PixCharge.Adapter.Models.Charge>, IParser<PixCharge.Adapter.Models.Charge, Charge>

@@ -1,15 +1,15 @@
-﻿using PixCharge.Domain.Account.Aggegrates;
-using PixCharge.Domain.Core.Aggreggates;
+﻿using PixCharge.Domain.Account.Aggregates;
+using PixCharge.Domain.Core.Aggregates;
 using PixCharge.Domain.Core.ValueObject;
 using PixCharge.Domain.Transactions.ValueObject;
 
-namespace PixCharge.Domain.Transactions.Aggreggates;
-public class PIX: BaseModel
+namespace PixCharge.Domain.Transactions.Aggregates;
+public class PIX : BaseModel
 {
-    
+
     public Guid CorrelationId { get; set; }
     public DateTime Date { get; set; }
-    public Status Status { get; set; }    
+    public Status Status { get; set; }
     public Customer Customer { get; set; }
     public Monetary Monetary { get; set; }
     public string Description { get; set; }

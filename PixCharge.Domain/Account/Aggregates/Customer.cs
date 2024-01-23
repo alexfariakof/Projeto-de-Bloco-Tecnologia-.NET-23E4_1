@@ -1,8 +1,7 @@
-﻿using PixCharge.Domain.Core.ValueObject;
-using PixCharge.Domain.Transactions.Aggreggates;
+﻿using PixCharge.Domain.Transactions.Aggregates;
 using System.Text.Json.Serialization;
 
-namespace PixCharge.Domain.Account.Aggegrates;
+namespace PixCharge.Domain.Account.Aggregates;
 public class Customer : AbstractAccount<Customer>
 {
     public Guid? CorrelationID { get; set; }

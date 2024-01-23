@@ -1,4 +1,4 @@
-using PixCharge.Infrastructure.DependenceInject;
+using PixCharge.Infrastructure.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 

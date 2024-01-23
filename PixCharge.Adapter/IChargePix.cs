@@ -1,4 +1,4 @@
-﻿using PixCharge.Domain.Transactions.Aggreggates;
+﻿using PixCharge.Domain.Transactions.Aggregates;
 
 namespace PixCharge.Adapter;
 public interface IChargePix

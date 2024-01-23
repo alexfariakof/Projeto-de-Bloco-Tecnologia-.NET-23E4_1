@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PixCharge.Domain.Core.Aggreggates;
+namespace PixCharge.Domain.Core.Aggregates;
 public class Crypto : ICrypto
 {
     private readonly byte[] Key; // Chave fixa de 256 bits
@@ -38,7 +38,7 @@ public class Crypto : ICrypto
         if (File.Exists(jsonFilePath))
         {
             var jsonContent = File.ReadAllText(jsonFilePath);
-            var config = JObject.Parse(jsonContent);                
+            var config = JObject.Parse(jsonContent);
             var cryptoKey = config["Crypto"]?["Key"]?.ToString();
             return cryptoKey;
         }
@@ -46,7 +46,7 @@ public class Crypto : ICrypto
         {
             throw new ArgumentException("Arquivo com chave de criptografia não encontrado");
         }
-    }        
+    }
     public string Encrypt(string password)
     {
         byte[] iv = GenerateIV();

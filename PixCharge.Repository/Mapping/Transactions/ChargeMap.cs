@@ -1,6 +1,6 @@
-﻿using PixCharge.Domain.Transactions.Aggreggates;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PixCharge.Domain.Transactions.Aggregates;
 
 namespace PixCharge.Repository.Mapping;
 public class ChargeMap : IEntityTypeConfiguration<Charge>

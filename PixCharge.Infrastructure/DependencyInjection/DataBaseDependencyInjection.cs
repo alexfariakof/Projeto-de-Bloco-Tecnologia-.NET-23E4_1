@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace PixCharge.Infrastructure.DependenceInject;
+namespace PixCharge.Infrastructure.DependencyInjection;
 public static class DataBaseDependencyInjection
 {
     public static void CreateDataBaseMySqlServer(this IServiceCollection services, IConfiguration configuration)

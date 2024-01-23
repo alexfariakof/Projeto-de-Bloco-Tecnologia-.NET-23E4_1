@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PixCharge.Domain.Account.Aggegrates;
-using PixCharge.Domain.Transactions.Aggreggates;
+using PixCharge.Domain.Account.Aggregates;
+using PixCharge.Domain.Transactions.Aggregates;
 using PixCharge.Repository.Mapping;
 
 namespace PixCharge.Infrastructure;

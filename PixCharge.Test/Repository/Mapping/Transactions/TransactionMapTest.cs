@@ -1,12 +1,13 @@
-﻿using PixCharge.Repository.Mapping;
+﻿using PixCharge.Domain.Transactions.Aggregates;
+using PixCharge.Repository.Mapping;
 
-namespace Repository.Mapping;
+namespace Repository.Mapping.Transactions;
 public class TransactionMapTest
 {
     [Fact]
     public void EntityConfiguration_IsValid()
     {
-        const int PROPERTY_COUNT = 6;           
+        const int PROPERTY_COUNT = 6;
 
         // Arrange
         var options = new DbContextOptionsBuilder<MockRegisterContext>()
@@ -36,8 +37,8 @@ public class TransactionMapTest
             Assert.NotNull(dtTransactionProperty);
             Assert.NotNull(descriptionProperty);
 
-            Assert.True(idProperty.IsPrimaryKey());                
-            Assert.False(dtTransactionProperty.IsNullable);                
+            Assert.True(idProperty.IsPrimaryKey());
+            Assert.False(dtTransactionProperty.IsNullable);
             Assert.False(descriptionProperty.IsNullable);
             Assert.Equal(50, descriptionProperty.GetMaxLength());
             Assert.NotNull(customerNavigation);

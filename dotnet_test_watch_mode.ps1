@@ -1,14 +1,13 @@
 cls
 
-# Pasta onde o relatÃ¡rio serÃ¡ gerado
+# Pasta onde o relatário será gerado
 $baseDirectory = Join-Path -Path (Get-Location) -ChildPath ""
 $projectTestPath = Join-Path -Path (Get-Location) -ChildPath "PixCharge.Test"
 $sourceDirs = "$baseDirectory\PixCharge.Domain;$baseDirectory\PixCharge.Infrastructure;$baseDirectory\PixCharge.Repository;$baseDirectory\PixCharge.SPA"
 $reportPath = Join-Path -Path (Get-Location) -ChildPath "PixCharge.Test\TestResults"
-$coverageXmlPath = Join-Path -Path (Join-Path -Path $baseDirectory -ChildPath "TestResults") -ChildPath "coveragereport"
-
-
-# FunÃ§Ã£o para matar processos com base no nome do processo que estajam em execuÃ§Ã£o 
+$coverageXmlPath = Join-Path -Path (Join-Path -Path $projectTestPath -ChildPath "TestResults") -ChildPath "coveragereport"
+$filefilters = "$projectPath\PixCharge.Infrastructure.Migrations_MsSqlServer\**;$projectPath\PixCharge.Infrastructure.Migrations_MySqlServer\**;"
+# Função para matar processos com base no nome do processo que estajam em execução 
 function Stop-ProcessesByName {
     $processes = Get-Process | Where-Object { $_.ProcessName -like 'dotnet*' } | Where-Object { $_.MainWindowTitle -eq '' }
     if ($processes.Count -gt 0) {
@@ -42,25 +41,12 @@ function Remove-TestResults {
 
  } 
 
-# Encerra qualquer processo em segundo plano relacionado
 Stop-ProcessesByName
-# Exclui todo o conteÃºdo da pasta TestResults, se existir
 Remove-TestResults
-
 dotnet clean slnPixCharge.sln > $null 2>&1
-if ($args -contains "-w") {
-
-    $watchProcess = Start-Process "dotnet" -ArgumentList "watch", "test", "--project ./PixCharge.Test/PixCharge.Test.csproj", "--collect:""XPlat Code Coverage;Format=opencover""", "/p:CollectCoverage=true", "/p:CoverletOutputFormat=cobertura" -PassThru
-    Wait-TestResults
-    Invoke-Item $coverageXmlPath\index.html
-
-    $watchProcess.WaitForExit()
-}
-else {
-    dotnet test --results-directory $reportPath /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage;Format=opencover"
-    Wait-TestResults
-    Invoke-Item $coverageXmlPath\index.html
-}  
-
- Stop-ProcessesByName; 
- Exit 
+$watchProcess = Start-Process "dotnet" -ArgumentList "watch", "test", "--project ./PixCharge.Test/PixCharge.Test.csproj", "--collect:""XPlat Code Coverage;Format=opencover""", "/p:CollectCoverage=true", "/p:CoverletOutputFormat=cobertura" -PassThru
+ Wait-TestResults
+ Invoke-Item $coverageXmlPath\index.html
+$watchProcess.WaitForExit()
+Stop-ProcessesByName; 
+Exit 

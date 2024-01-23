@@ -1,9 +1,9 @@
 ﻿using PixCharge.Adapter;
 using PixCharge.Adapter.OpenPix;
 using PixCharge.Business.Interfaces;
-using PixCharge.Domain.Account.Aggegrates;
+using PixCharge.Domain.Account.Aggregates;
 using PixCharge.Domain.Core.ValueObject;
-using PixCharge.Domain.Transactions.Aggreggates;
+using PixCharge.Domain.Transactions.Aggregates;
 
 namespace PixCharge.Business;
 public class ChargeBusiness : IChargeBusiness

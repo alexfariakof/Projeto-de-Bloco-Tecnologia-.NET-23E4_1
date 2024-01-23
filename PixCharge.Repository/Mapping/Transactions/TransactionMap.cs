@@ -1,7 +1,6 @@
-﻿using PixCharge.Domain.Transactions.Aggreggates;
-using PixCharge.Domain.Core.ValueObject;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using PixCharge.Domain.Transactions.Aggregates;
 
 namespace PixCharge.Repository.Mapping;
 public class TransactionMap : IEntityTypeConfiguration<Transaction>
@@ -19,7 +18,7 @@ public class TransactionMap : IEntityTypeConfiguration<Transaction>
                .HasForeignKey(x => x.CorrelationId)
                .IsRequired();
 
-        builder.OwnsOne<Monetary>(d => d.Value, c =>
+        builder.OwnsOne(d => d.Value, c =>
         {
             c.Property(x => x.Value)
             .HasColumnName("Monetary")

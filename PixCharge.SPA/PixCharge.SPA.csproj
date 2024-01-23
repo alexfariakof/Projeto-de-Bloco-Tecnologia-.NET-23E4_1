@@ -10,7 +10,6 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>0167caae-ae53-4d56-b8d8-a495e6f63282</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <Watch>true</Watch>
   </PropertyGroup>
 
@@ -47,7 +46,7 @@
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
   </Target>
 
-  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And Exists('$(SpaRoot)node_modules') ">
+  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And Exists('$(SpaRoot)node_modules') And '$(IsTestProject)' != 'true'">
     <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --configuration production" />
   </Target>
 

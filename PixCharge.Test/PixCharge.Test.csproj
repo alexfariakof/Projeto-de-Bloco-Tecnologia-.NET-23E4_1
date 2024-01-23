@@ -1,22 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <Watch>true</Watch>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Domain\Transactions\ValueObject\.gitKeep" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Domain\Transactions\ValueObject\.gitKeep" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Bogus" Version="35.4.0" />
     <PackageReference Include="coverlet.msbuild" Version="6.0.0">
@@ -44,5 +35,14 @@
     <ProjectReference Include="..\PixCharge.Repository\PixCharge.Repository.csproj" />
     <ProjectReference Include="..\PixCharge.SPA\PixCharge.SPA.csproj" />
   </ItemGroup>
+  <PropertyGroup>
+    <TestDependsOn>
+      AfterTest;
+    </TestDependsOn>
+  </PropertyGroup>
+  <Target Name="Test" AfterTargets="Build;Rebuild"  DependsOnTargets="$(TestDependsOn)" Condition="'$(MSBuildRuntimeType)' == 'Core'" />  
+  <Target Name="AfterTest" >
+    <Exec Command="powershell -File .\coverage_report.ps1" />
+  </Target>
 
 </Project>

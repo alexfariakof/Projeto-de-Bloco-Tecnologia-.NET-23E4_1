@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PixCharge.Adapter.Converters;
-using PixCharge.Domain.Transactions.Aggreggates;
+using PixCharge.Domain.Transactions.Aggregates;
 using System.Net.Http.Headers;
 
 namespace PixCharge.Adapter.OpenPix;
