@@ -34,7 +34,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PixCharge.Infrastructure.Migrations_MsSqlServer\PixCharge.Infrastructure.Migrations_MsSqlServer.csproj" />
     <ProjectReference Include="..\PixCharge.Infrastructure.Migrations_MySqlServer\PixCharge.Infrastructure.Migrations_MySqlServer.csproj" />
-    <ProjectReference Include="..\PixCharge.Infrastructure\PixCharge.Infrastructure.csproj" />
+    <ProjectReference Include="..\PixCharge.Repository\PixCharge.Repository.csproj" />
   </ItemGroup>
  
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

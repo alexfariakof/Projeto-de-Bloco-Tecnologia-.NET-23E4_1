@@ -1,4 +1,4 @@
-﻿namespace PixCharge.Adapter.Converters;
+﻿namespace PixCharge.Integration.Adapter.Converters;
 public interface IParser<O, D>
 {
     D Parse(O origin);

@@ -1,20 +1,16 @@
-﻿using PixCharge.Domain.Account.Aggregates;
-using PixCharge.Domain.Transactions.ValueObject;
-using PixCharge.Domain.Core.ValueObject;
-using PixCharge.Domain.Core.Aggregates;
-
-namespace PixCharge.Domain.Transactions.Aggregates;
+﻿namespace PixCharge.Integration.Adapter.Plataform.OpenPix.Models;
 
 [Serializable]
-public sealed class Charge : BaseModel
+public sealed class ChargeOpenPix
 {
-    public Guid CorrelationID { get; set; }
-    public Customer Customer { get; set; }
+    public CustomerOpenPix Customer { get; set; }
     public long Value { get; set; }
     public string Identifier { get; set; }
+    public string CorrelationID { get; set; }
     public string PaymentLinkID { get; set; }
     public string TransactionID { get; set; }
     public string Status { get; set; }
+    public AdditionalInfoOpenPix[] AdditionalInfo { get; set; }
     public int Discount { get; set; }
     public int ValueWithDiscount { get; set; }
     public DateTime ExpiresDate { get; set; }
@@ -27,12 +23,4 @@ public sealed class Charge : BaseModel
     public string PaymentLinkUrl { get; set; }
     public string QrCodeImage { get; set; }
     public string GlobalID { get; set; }
-    public Charge() { }
-    public Charge(PIX pix, Monetary value)
-    {
-        Customer = pix.Customer;
-        CorrelationID = pix.CorrelationId;
-        Value = value.Cents;
-    }
-
 }

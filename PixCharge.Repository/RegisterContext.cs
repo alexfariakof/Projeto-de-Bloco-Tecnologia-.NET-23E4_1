@@ -3,7 +3,7 @@ using PixCharge.Domain.Account.Aggregates;
 using PixCharge.Domain.Transactions.Aggregates;
 using PixCharge.Repository.Mapping;
 
-namespace PixCharge.Infrastructure;
+namespace PixCharge.Repository;
 public class RegisterContext: DbContext
 {
     public RegisterContext(DbContextOptions<RegisterContext> options) : base(options) { }

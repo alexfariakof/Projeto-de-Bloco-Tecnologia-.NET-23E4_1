@@ -1,7 +1,7 @@
 ﻿using PixCharge.Domain.Transactions.Aggregates;
 
-namespace PixCharge.Adapter;
-public interface IChargePix
+namespace PixCharge.Integration.Adapter;
+public interface IPix
 {
     public Charge CreateCharge(long Value, string CorrelationID);
     public Boolean IsChargeApporve(Guid correlationID);

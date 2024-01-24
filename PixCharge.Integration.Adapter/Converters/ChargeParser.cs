@@ -1,12 +1,13 @@
 ﻿using PixCharge.Domain.Transactions.Aggregates;
+using PixCharge.Integration.Adapter.Plataform.OpenPix.Models;
 
-namespace PixCharge.Adapter.Converters;
-public class ChargeParser : IParser<Charge, PixCharge.Adapter.Models.Charge>, IParser<PixCharge.Adapter.Models.Charge, Charge>
+namespace PixCharge.Integration.Adapter.Converters;
+public class ChargeParser : IParser<Charge, ChargeOpenPix>, IParser<ChargeOpenPix, Charge>
 {
-    public Adapter.Models.Charge Parse(Charge origin)
+    public ChargeOpenPix Parse(Charge origin)
     {
-        if (origin == null) return new Adapter.Models.Charge();
-        return new PixCharge.Adapter.Models.Charge
+        if (origin == null) return new ChargeOpenPix();
+        return new ChargeOpenPix
         {
             Customer =
             {
@@ -33,7 +34,6 @@ public class ChargeParser : IParser<Charge, PixCharge.Adapter.Models.Charge>, IP
             PaymentLinkID = origin.PaymentLinkID,
             TransactionID = origin.TransactionID,
             Status = origin.Status,
-            //AdditionalInfo. = origin.AdditionalInfo.GetValue(),
             Discount = origin.Discount,
             ValueWithDiscount = origin.ValueWithDiscount,
             ExpiresDate  = origin.ExpiresDate,
@@ -49,7 +49,7 @@ public class ChargeParser : IParser<Charge, PixCharge.Adapter.Models.Charge>, IP
         };
     }
 
-    public  Charge Parse(Adapter.Models.Charge origin)
+    public  Charge Parse(ChargeOpenPix origin)
     {
         if (origin == null) return new Charge();
         return new Charge
@@ -80,7 +80,6 @@ public class ChargeParser : IParser<Charge, PixCharge.Adapter.Models.Charge>, IP
             PaymentLinkID = origin.PaymentLinkID,
             TransactionID = origin.TransactionID,
             Status = origin.Status,
-            //AdditionalInfo. = origin.AdditionalInfo,
             Discount = origin.Discount,
             ValueWithDiscount = origin.ValueWithDiscount,
             ExpiresDate = origin.ExpiresDate,
@@ -94,15 +93,14 @@ public class ChargeParser : IParser<Charge, PixCharge.Adapter.Models.Charge>, IP
             QrCodeImage = origin.QrCodeImage,
             GlobalID = origin.GlobalID
         };
-
     }
 
-    public List<Adapter.Models.Charge> ParseList(List<Charge> origin)
+    public List<ChargeOpenPix> ParseList(List<Charge> origin)
     {
         throw new NotImplementedException();
     }
 
-    public List<Charge> ParseList(List<Adapter.Models.Charge> origin)
+    public List<Charge> ParseList(List<ChargeOpenPix> origin)
     {
         throw new NotImplementedException();
     }

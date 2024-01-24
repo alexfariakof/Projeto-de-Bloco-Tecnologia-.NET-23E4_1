@@ -3,6 +3,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <IsTestProject>false</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,6 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PixCharge.Infrastructure\PixCharge.Infrastructure.csproj" />
+    <ProjectReference Include="..\PixCharge.Repository\PixCharge.Repository.csproj" />
   </ItemGroup>  
 </Project>

@@ -3,7 +3,7 @@ cls
 # Pasta onde o relatário será gerado
 $baseDirectory = Join-Path -Path (Get-Location) -ChildPath ""
 $projectTestPath = Join-Path -Path (Get-Location) -ChildPath "PixCharge.Test"
-$sourceDirs = "$baseDirectory\PixCharge.Domain;$baseDirectory\PixCharge.Infrastructure;$baseDirectory\PixCharge.Repository;$baseDirectory\PixCharge.SPA"
+$sourceDirs = "$baseDirectory\PixCharge.Business;$baseDirectory\PixCharge.Domain;$baseDirectory\PixCharge.Repository;$baseDirectory\PixCharge.SPA"
 $reportPath = Join-Path -Path (Get-Location) -ChildPath "PixCharge.Test\TestResults"
 $coverageXmlPath = Join-Path -Path $reportPath -ChildPath "coveragereport"
 
@@ -26,16 +26,16 @@ function Remove-TestResults {
     $REPEAT_WHILE = 0
     while (-not (Test-Path $reportPath)) {
         echo "Agaurdando TestResults..."
-        Start-Sleep -Seconds 5        
-        if ($REPEAT_WHILE -eq 10) { break }
+        Start-Sleep -Seconds 10        
+        if ($REPEAT_WHILE -eq 6) { break }
         $REPEAT_WHILE = $REPEAT_WHILE + 1
     }
 
     $REPEAT_WHILE = 0
     while (-not (Test-Path $coverageXmlPath)) {
         echo "Agaurdando Coverage Report..."
-        Start-Sleep -Seconds 5        
-        if ($REPEAT_WHILE -eq 10) { break }
+        Start-Sleep -Seconds 10        
+        if ($REPEAT_WHILE -eq 6) { break }
         $REPEAT_WHILE = $REPEAT_WHILE + 1
     }   
 

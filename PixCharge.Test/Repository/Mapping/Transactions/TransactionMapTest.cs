@@ -1,7 +1,6 @@
-﻿using PixCharge.Domain.Transactions.Aggregates;
-using PixCharge.Repository.Mapping;
+﻿using PixCharge.Repository.Mapping;
 
-namespace Repository.Mapping.Transactions;
+namespace Repository.Mapping;
 public class TransactionMapTest
 {
     [Fact]

@@ -31,7 +31,6 @@
   <ItemGroup>
     <ProjectReference Include="..\PixCharge.Business\PixCharge.Business.csproj" />
     <ProjectReference Include="..\PixCharge.Domain\PixCharge.Domain.csproj" />
-    <ProjectReference Include="..\PixCharge.Infrastructure\PixCharge.Infrastructure.csproj" />
     <ProjectReference Include="..\PixCharge.Repository\PixCharge.Repository.csproj" />
     <ProjectReference Include="..\PixCharge.SPA\PixCharge.SPA.csproj" />
   </ItemGroup>
@@ -40,8 +39,8 @@
       AfterTest;
     </TestDependsOn>
   </PropertyGroup>
-  <Target Name="Test" AfterTargets="Build;Rebuild"  DependsOnTargets="$(TestDependsOn)" Condition="'$(MSBuildRuntimeType)' == 'Core'" />  
-  <Target Name="AfterTest" >
+  <Target Name="Test" AfterTargets="Build;Rebuild" DependsOnTargets="$(TestDependsOn)" Condition="'$(MSBuildRuntimeType)' == 'Core'" />  
+  <Target Name="AfterTest">
     <Exec Command="powershell -File .\coverage_report.ps1" />
   </Target>
 

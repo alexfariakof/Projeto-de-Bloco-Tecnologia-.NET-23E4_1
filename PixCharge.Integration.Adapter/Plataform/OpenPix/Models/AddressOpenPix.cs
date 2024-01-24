@@ -1,7 +1,7 @@
-﻿namespace PixCharge.Adapter.Models;
+﻿namespace PixCharge.Integration.Adapter.Plataform.OpenPix.Models;
 
 [Serializable]
-public sealed class Address
+public sealed class AddressOpenPix
 {
     public string Zipcode { get; set; }
     public string Street { get; set; }
