@@ -28,7 +28,7 @@ public class ChargeParser : IParser<Charge, ChargeOpenPix>, IParser<ChargeOpenPi
                     Country = origin.Customer.Address.Country
                 }
             },
-            Value = origin.Value,
+            Value = (int)(origin.Value*100),
             Identifier = origin.Identifier,
             CorrelationID = origin.CorrelationID.ToString(),
             PaymentLinkID = origin.PaymentLinkID,
@@ -74,7 +74,7 @@ public class ChargeParser : IParser<Charge, ChargeOpenPix>, IParser<ChargeOpenPi
                     Country = origin.Customer.Address.Country
                 }
             },*/
-            Value = origin.Value,
+            Value = origin.Value/100,
             Identifier = origin.Identifier,
             CorrelationID = new Guid(origin.CorrelationID.ToString()),
             PaymentLinkID = origin.PaymentLinkID,

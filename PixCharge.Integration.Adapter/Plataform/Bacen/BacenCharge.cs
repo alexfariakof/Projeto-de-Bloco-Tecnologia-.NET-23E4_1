@@ -3,7 +3,7 @@
 namespace PixCharge.Integration.Adapter.Plataform.Bacen;
 public class BacenCharge : IPix
 {
-    public Charge CreateCharge(long Value, string CorrelationID)
+    public Charge CreateCharge(decimal Value, string CorrelationID)
     {
         throw new NotImplementedException();
     }

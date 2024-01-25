@@ -10,7 +10,7 @@ public sealed class Charge : BaseModel
 {
     public Guid CorrelationID { get; set; }
     public Customer Customer { get; set; }
-    public long Value { get; set; }
+    public Monetary Value { get; set; }
     public string Identifier { get; set; }
     public string PaymentLinkID { get; set; }
     public string TransactionID { get; set; }
@@ -32,7 +32,7 @@ public sealed class Charge : BaseModel
     {
         Customer = pix.Customer;
         CorrelationID = pix.CorrelationId;
-        Value = value.Cents;
+        Value = value;
     }
 
 }

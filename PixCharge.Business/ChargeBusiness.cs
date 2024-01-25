@@ -25,7 +25,7 @@ public class ChargeBusiness : IChargeBusiness
         transaction = this.ValidateTransaction(transaction, pix.Customer) ?? transaction;
 
         IPix chargePix = new OpenPix();
-        var charge = chargePix.CreateCharge(value.Cents, transaction.CorrelationId.Value.ToString());
+        var charge = chargePix.CreateCharge(value, transaction.CorrelationId.Value.ToString());
 
         //pix.Status = charge.Status;
         pix.QrCode.Url = charge.QrCodeImage;

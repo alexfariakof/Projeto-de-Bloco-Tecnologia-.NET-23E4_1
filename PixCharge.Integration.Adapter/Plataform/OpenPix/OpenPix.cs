@@ -9,13 +9,13 @@ public class OpenPix : IPix
 {
     private const string baseUrl = "https://api.openpix.com.br/api/v1/";
     private string Authorization = null;
-    public Charge CreateCharge(long value, string correlationID)
+    public Charge CreateCharge(decimal value, string correlationID)
     {
         GetAuthorization();
         HttpClient client = new HttpClient();
         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, $"{baseUrl}charge?return_existing=true");
         request.Headers.Add("Authorization", Authorization);
-        request.Content = new StringContent(JsonConvert.SerializeObject(new { value, correlationID }));
+        request.Content = new StringContent(JsonConvert.SerializeObject(new { value = (int)(value * 100), correlationID }));
         request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
         HttpResponseMessage response = client.SendAsync(request).Result;
         response.EnsureSuccessStatusCode();
@@ -43,5 +43,4 @@ public class OpenPix : IPix
             throw new ArgumentException("Arquivo com chave de autenticação não encontrado");
         }
     }
-
 }
