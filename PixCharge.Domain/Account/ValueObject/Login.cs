@@ -1,4 +1,4 @@
-﻿using PixCharge.Domain.Core.Aggreggates;
+﻿using PixCharge.Domain.Core.Aggregates;
 using System.Text.RegularExpressions;
 
 namespace PixCharge.Domain.Account.ValueObject;

@@ -1,6 +1,6 @@
-﻿using PixCharge.Infrastructure;
+﻿using PixCharge.Repository;
 
-namespace Infrastructure;
+namespace Repository;
 public class RegisterContextTest
 {
 

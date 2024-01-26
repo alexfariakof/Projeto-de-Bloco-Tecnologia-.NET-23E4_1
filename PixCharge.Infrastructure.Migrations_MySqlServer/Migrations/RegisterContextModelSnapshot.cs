@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using PixCharge.Infrastructure;
+using PixCharge.Repository;
 
 #nullable disable
 
@@ -19,7 +19,7 @@ namespace PixCharge.Infrastructure.Migrations_MySqlServer.Migrations
                 .HasAnnotation("ProductVersion", "6.0.26")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("PixCharge.Domain.Account.Aggegrates.Customer", b =>
+            modelBuilder.Entity("PixCharge.Domain.Account.Aggregates.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,17 +101,17 @@ namespace PixCharge.Infrastructure.Migrations_MySqlServer.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggreggates.Charge", b =>
+            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggregates.Charge", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<string>("BrCode")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid?>("CorrelationID")
-                        .IsRequired()
+                    b.Property<Guid>("CorrelationID")
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -127,37 +127,43 @@ namespace PixCharge.Infrastructure.Migrations_MySqlServer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("GlobalID")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Identifier")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("PaymentLinkID")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("PaymentLinkUrl")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("PixKey")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("QrCodeImage")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Status")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("TransactionID")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<long>("Value")
-                        .HasColumnType("bigint");
 
                     b.Property<int>("ValueWithDiscount")
                         .HasColumnType("int");
@@ -169,7 +175,7 @@ namespace PixCharge.Infrastructure.Migrations_MySqlServer.Migrations
                     b.ToTable("Charge", (string)null);
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggreggates.Transaction", b =>
+            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggregates.Transaction", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -194,29 +200,7 @@ namespace PixCharge.Infrastructure.Migrations_MySqlServer.Migrations
                     b.ToTable("Transaction", (string)null);
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Transactions.ValueObject.AdditionalInfo", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("char(36)");
-
-                    b.Property<Guid?>("ChargeId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<string>("Key")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Value")
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChargeId");
-
-                    b.ToTable("AdditionalInfo");
-                });
-
-            modelBuilder.Entity("PixCharge.Domain.Account.Aggegrates.Customer", b =>
+            modelBuilder.Entity("PixCharge.Domain.Account.Aggregates.Customer", b =>
                 {
                     b.HasOne("PixCharge.Domain.Account.ValueObject.Address", "Address")
                         .WithMany()
@@ -277,20 +261,40 @@ namespace PixCharge.Infrastructure.Migrations_MySqlServer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggreggates.Charge", b =>
+            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggregates.Charge", b =>
                 {
-                    b.HasOne("PixCharge.Domain.Account.Aggegrates.Customer", "Customer")
+                    b.HasOne("PixCharge.Domain.Account.Aggregates.Customer", "Customer")
                         .WithMany("Charges")
                         .HasForeignKey("CorrelationID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.OwnsOne("PixCharge.Domain.Core.ValueObject.Monetary", "Value", b1 =>
+                        {
+                            b1.Property<Guid>("ChargeId")
+                                .HasColumnType("char(36)");
+
+                            b1.Property<decimal>("Value")
+                                .HasColumnType("decimal(18,2)")
+                                .HasColumnName("Monetary");
+
+                            b1.HasKey("ChargeId");
+
+                            b1.ToTable("Charge");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ChargeId");
+                        });
+
                     b.Navigation("Customer");
+
+                    b.Navigation("Value")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggreggates.Transaction", b =>
+            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggregates.Transaction", b =>
                 {
-                    b.HasOne("PixCharge.Domain.Account.Aggegrates.Customer", "Customer")
+                    b.HasOne("PixCharge.Domain.Account.Aggregates.Customer", "Customer")
                         .WithMany("Transactions")
                         .HasForeignKey("CorrelationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -319,23 +323,11 @@ namespace PixCharge.Infrastructure.Migrations_MySqlServer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Transactions.ValueObject.AdditionalInfo", b =>
-                {
-                    b.HasOne("PixCharge.Domain.Transactions.Aggreggates.Charge", null)
-                        .WithMany("AdditionalInfo")
-                        .HasForeignKey("ChargeId");
-                });
-
-            modelBuilder.Entity("PixCharge.Domain.Account.Aggegrates.Customer", b =>
+            modelBuilder.Entity("PixCharge.Domain.Account.Aggregates.Customer", b =>
                 {
                     b.Navigation("Charges");
 
                     b.Navigation("Transactions");
-                });
-
-            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggreggates.Charge", b =>
-                {
-                    b.Navigation("AdditionalInfo");
                 });
 #pragma warning restore 612, 618
         }

@@ -11,10 +11,9 @@ public class ChargeBusinessTest
         PIX pix = new PIX(customer);
         IChargeBusiness business = new ChargeBusiness();
 
-        business.CreateTransaction(pix, 540.90m, "Teste Incusão Business Implementation");
+        business.CreateTransaction(pix, 4236.25m, "Teste Incusão Business Implementation");
         
         Assert.NotNull(pix.QrCode.Url);
         Assert.NotNull(pix.QrCode.BrCode);
     }
-
 }

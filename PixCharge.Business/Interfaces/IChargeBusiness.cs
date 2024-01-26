@@ -1,5 +1,5 @@
 ﻿using PixCharge.Domain.Core.ValueObject;
-using PixCharge.Domain.Transactions.Aggreggates;
+using PixCharge.Domain.Transactions.Aggregates;
 
 namespace PixCharge.Business.Interfaces;
 public interface IChargeBusiness

@@ -1,9 +1,9 @@
-﻿using PixCharge.Adapter;
-using PixCharge.Adapter.OpenPix;
+﻿using PixCharge.Integration.Adapter;
+using PixCharge.Integration.Adapter.Plataform.OpenPix;
 using PixCharge.Business.Interfaces;
-using PixCharge.Domain.Account.Aggegrates;
+using PixCharge.Domain.Account.Aggregates;
 using PixCharge.Domain.Core.ValueObject;
-using PixCharge.Domain.Transactions.Aggreggates;
+using PixCharge.Domain.Transactions.Aggregates;
 
 namespace PixCharge.Business;
 public class ChargeBusiness : IChargeBusiness
@@ -24,8 +24,8 @@ public class ChargeBusiness : IChargeBusiness
         // Verificãção de Existência de uma Transação PIX já Criada com o mesmo Valor dentro do Intervalo Minimo 
         transaction = this.ValidateTransaction(transaction, pix.Customer) ?? transaction;
 
-        IChargePix chargePix = new OpenPix();
-        var charge = chargePix.CreateCharge(value.Cents, transaction.CorrelationId.Value.ToString());
+        IPix chargePix = new OpenPix();
+        var charge = chargePix.CreateCharge(value, transaction.CorrelationId.Value.ToString());
 
         //pix.Status = charge.Status;
         pix.QrCode.Url = charge.QrCodeImage;

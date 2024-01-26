@@ -27,6 +27,15 @@
       "publishAllPorts": true,
       "useSSL": true,
       "DockerfileRunArguments": "-v \"{ProjectDir}\\angularapp\\dist:/app/wwwroot\""
+    },
+    "Run Test In Watch Mode": {
+      "workingDirectory": "../",
+      "commandName": "Executable",
+      "executablePath": "powershell.exe",
+      "commandLineArgs": "powershell -File \".\\dotnet_test_watch_mode.ps1\"",
+      "launchBrowser": false,
+      "debugType": "",
+      "leaveRunningOnClose": false     
     }
   },
   "iisSettings": {

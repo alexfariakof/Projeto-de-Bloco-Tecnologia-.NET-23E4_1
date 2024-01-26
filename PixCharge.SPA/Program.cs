@@ -1,4 +1,5 @@
-using PixCharge.Infrastructure.DependenceInject;
+using PixCharge.Repository.Data;
+using PixCharge.Repository.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,7 @@ builder.Services.AddCors(c =>
     });
 });
 
-builder.Services.CreateDataBaseMySqlServer(builder.Configuration);
-builder.Services.CreateDataBaseMsSqlServer(builder.Configuration);
+builder.Services.CreateDataBaseInMemory();
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
@@ -43,6 +43,7 @@ if (!app.Environment.IsProduction())
     });
 }
 
+/* Configuração para Debug em Containers Docker/Docker-Compose */
 if (app.Environment.IsStaging())
 {
     app.Urls.Add("http://0.0.0.0:2000");
@@ -54,4 +55,12 @@ app.UseAuthorization();
 app.MapControllers();
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dataSeeder = services.GetRequiredService<IDataSeeder>();
+    dataSeeder.SeedData();
+}
+
 app.Run();

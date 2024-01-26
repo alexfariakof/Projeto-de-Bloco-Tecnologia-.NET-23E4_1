@@ -1,4 +1,4 @@
-﻿using PixCharge.Domain.Core.Aggreggates;
+﻿using PixCharge.Domain.Core.Aggregates;
 
 namespace PixCharge.Domain.Account.ValueObject;
 public class Address : BaseModel

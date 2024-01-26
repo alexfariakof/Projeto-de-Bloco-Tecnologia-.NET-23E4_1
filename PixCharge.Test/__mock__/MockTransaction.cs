@@ -1,4 +1,5 @@
 ﻿using Bogus;
+using PixCharge.Domain.Transactions.Aggregates;
 
 namespace __mock__;
 public static class MockTransaction

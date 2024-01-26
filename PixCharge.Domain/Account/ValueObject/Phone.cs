@@ -8,7 +8,7 @@ public record Phone
     public Phone(string value)
     {
         if (string.IsNullOrEmpty(value))
-            throw new ArgumentException("Valor do telefone não pode ser em branco");
+            throw new ArgumentException("Valor do telefone não pode ser nulo ou em branco");
 
         Number = value;
     }
