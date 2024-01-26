@@ -22,7 +22,7 @@ namespace PixCharge.Infrastructure.Migrations_MsSqlServer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("PixCharge.Domain.Account.Aggegrates.Customer", b =>
+            modelBuilder.Entity("PixCharge.Domain.Account.Aggregates.Customer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,8 +39,8 @@ namespace PixCharge.Infrastructure.Migrations_MsSqlServer.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
-                    b.Property<string>("CorrelationID")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid?>("CorrelationID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)")
@@ -104,13 +104,88 @@ namespace PixCharge.Infrastructure.Migrations_MsSqlServer.Migrations
                     b.ToTable("Address");
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggreggates.Transaction", b =>
+            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggregates.Charge", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CorrelationId")
+                    b.Property<string>("BrCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CorrelationID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Discount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ExpiresDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ExpiresIn")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GlobalID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Identifier")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentLinkID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentLinkUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PixKey")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("QrCodeImage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TransactionID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ValueWithDiscount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CorrelationID");
+
+                    b.ToTable("Charge", (string)null);
+                });
+
+            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggregates.Transaction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CorrelationId")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -123,10 +198,12 @@ namespace PixCharge.Infrastructure.Migrations_MsSqlServer.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CorrelationId");
+
                     b.ToTable("Transaction", (string)null);
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Account.Aggegrates.Customer", b =>
+            modelBuilder.Entity("PixCharge.Domain.Account.Aggregates.Customer", b =>
                 {
                     b.HasOne("PixCharge.Domain.Account.ValueObject.Address", "Address")
                         .WithMany()
@@ -187,11 +264,42 @@ namespace PixCharge.Infrastructure.Migrations_MsSqlServer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggreggates.Transaction", b =>
+            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggregates.Charge", b =>
                 {
-                    b.HasOne("PixCharge.Domain.Account.Aggegrates.Customer", "Customer")
+                    b.HasOne("PixCharge.Domain.Account.Aggregates.Customer", "Customer")
+                        .WithMany("Charges")
+                        .HasForeignKey("CorrelationID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("PixCharge.Domain.Core.ValueObject.Monetary", "Value", b1 =>
+                        {
+                            b1.Property<Guid>("ChargeId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<decimal>("Value")
+                                .HasColumnType("decimal(18,2)")
+                                .HasColumnName("Monetary");
+
+                            b1.HasKey("ChargeId");
+
+                            b1.ToTable("Charge");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ChargeId");
+                        });
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Value")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PixCharge.Domain.Transactions.Aggregates.Transaction", b =>
+                {
+                    b.HasOne("PixCharge.Domain.Account.Aggregates.Customer", "Customer")
                         .WithMany("Transactions")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("CorrelationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -218,8 +326,10 @@ namespace PixCharge.Infrastructure.Migrations_MsSqlServer.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("PixCharge.Domain.Account.Aggegrates.Customer", b =>
+            modelBuilder.Entity("PixCharge.Domain.Account.Aggregates.Customer", b =>
                 {
+                    b.Navigation("Charges");
+
                     b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618

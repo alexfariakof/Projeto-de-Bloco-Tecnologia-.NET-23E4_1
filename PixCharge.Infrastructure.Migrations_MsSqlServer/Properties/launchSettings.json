@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "PixCharge.Infrastructure.Migrations_MsSqlServer": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:53183;http://localhost:53184"
+    }
+  }
+}

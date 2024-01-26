@@ -12,6 +12,8 @@ Add-Migration Changes-relationship-between-Card-and-CardBrand
 
 Add-Migration ChargeMap_Domain
 
+Add-Migration Update_Project_Models
+
 # At root path Migrations project "U can see this at folder Migrations in project too"
 dotnet ef migrations list
 
