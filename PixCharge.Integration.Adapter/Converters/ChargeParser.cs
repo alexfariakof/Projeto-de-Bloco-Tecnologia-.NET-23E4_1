@@ -7,46 +7,46 @@ public class ChargeParser : IParser<Charge, ChargeOpenPix>, IParser<ChargeOpenPi
     public ChargeOpenPix Parse(Charge origin)
     {
         if (origin == null) return new ChargeOpenPix();
-        return new ChargeOpenPix
+        var chargeOpenPix = new ChargeOpenPix();
+
+        chargeOpenPix.Customer = new CustomerOpenPix
         {
-            Customer =
-            {
-                Name = origin.Customer.Name,
-                TaxID = origin.Customer.TaxID,
-                Email = origin.Customer.Email,
-                Phone = origin.Customer.Phone,
-                CorrelationID = origin.Customer.CorrelationID.ToString(),
-                Address =
-                {
-                    Zipcode = origin.Customer.Address.Zipcode,
-                    Street = origin.Customer.Address.Street,
-                    Number = origin.Customer.Address.Number,
-                    Neighborhood = origin.Customer.Address.Neighborhood,
-                    City = origin.Customer.Address.City,
-                    State = origin.Customer.Address.State,
-                    Complement = origin.Customer.Address.Complement,
-                    Country = origin.Customer.Address.Country
-                }
-            },
-            Value = (int)(origin.Value*100),
-            Identifier = origin.Identifier,
-            CorrelationID = origin.CorrelationID.ToString(),
-            PaymentLinkID = origin.PaymentLinkID,
-            TransactionID = origin.TransactionID,
-            Status = origin.Status,
-            Discount = origin.Discount,
-            ValueWithDiscount = origin.ValueWithDiscount,
-            ExpiresDate  = origin.ExpiresDate,
-            Type = origin.Type,
-            CreatedAt = origin.CreatedAt,
-            UpdatedAt = origin.UpdatedAt,
-            BrCode = origin.BrCode,
-            ExpiresIn = origin.ExpiresIn,
-            PixKey = origin.PixKey,
-            PaymentLinkUrl = origin.PaymentLinkUrl,
-            QrCodeImage = origin.QrCodeImage,
-            GlobalID = origin.GlobalID
+            Name = origin.Customer.Name,
+            TaxID = origin.Customer.TaxID,
+            Email = origin.Customer.Email,
+            Phone = origin.Customer.Phone,
+            CorrelationID = origin.Customer.CorrelationID.ToString()
         };
+        chargeOpenPix.Customer.Address = new AddressOpenPix
+        {
+            Zipcode = origin.Customer.Address.Zipcode,
+            Street = origin.Customer.Address.Street,
+            Number = origin.Customer.Address.Number,
+            Neighborhood = origin.Customer.Address.Neighborhood,
+            City = origin.Customer.Address.City,
+            State = origin.Customer.Address.State,
+            Complement = origin.Customer.Address.Complement,
+            Country = origin.Customer.Address.Country
+        };
+        chargeOpenPix.Value = (int)(origin.Value * 100);
+        chargeOpenPix.Identifier = origin.Identifier;
+        chargeOpenPix.CorrelationID = origin.CorrelationID.ToString();
+        chargeOpenPix.PaymentLinkID = origin.PaymentLinkID;
+        chargeOpenPix.TransactionID = origin.TransactionID;
+        chargeOpenPix.Status = origin.Status;
+        chargeOpenPix.Discount = origin.Discount;
+        chargeOpenPix.ValueWithDiscount = origin.ValueWithDiscount;
+        chargeOpenPix.ExpiresDate = origin.ExpiresDate;
+        chargeOpenPix.Type = origin.Type;
+        chargeOpenPix.CreatedAt = origin.CreatedAt;
+        chargeOpenPix.UpdatedAt = origin.UpdatedAt;
+        chargeOpenPix.BrCode = origin.BrCode;
+        chargeOpenPix.ExpiresIn = origin.ExpiresIn;
+        chargeOpenPix.PixKey = origin.PixKey;
+        chargeOpenPix.PaymentLinkUrl = origin.PaymentLinkUrl;
+        chargeOpenPix.QrCodeImage = origin.QrCodeImage;
+        chargeOpenPix.GlobalID = origin.GlobalID;
+        return chargeOpenPix;
     }
 
     public  Charge Parse(ChargeOpenPix origin)
