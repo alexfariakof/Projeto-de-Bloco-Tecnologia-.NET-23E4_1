@@ -1,6 +1,6 @@
 $projectTestPath = Get-Location
 $projectPath =  (Resolve-Path -Path ..).Path
-$sourceDirs = "$projectPath\PixCharge.Business;$projectPath\PixCharge.Domain;$projectPath\PixCharge.Repository;$projectPath\PixCharge.SPA;$projectPath\PixCharge.SPA\angularapp"
+$sourceDirs = "$projectPath\PixCharge.Api;$projectPath\PixCharge.Application;$projectPath\PixCharge.Domain;$projectPath\PixCharge.Repository;"
 $reportPath = Join-Path -Path $projectTestPath -ChildPath "TestResults"
 $coverageXmlPath = Join-Path -Path (Join-Path -Path $projectTestPath -ChildPath "TestResults") -ChildPath "coveragereport"
 $filefilters = "-$projectPath\PixCharge.Infrastructure.Migrations_MsSqlServer\**;-$projectPath\PixCharge.Infrastructure.Migrations_MySqlServer\**;-$projectPath\PixCharge.Integration.Adapter\**;"

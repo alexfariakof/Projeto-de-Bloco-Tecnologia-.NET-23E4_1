@@ -29,19 +29,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PixCharge.Business\PixCharge.Business.csproj" />
+    <ProjectReference Include="..\PixCharge.Api\PixCharge.Api.csproj" />
+    <ProjectReference Include="..\PixCharge.Application\PixCharge.Application.csproj" />
     <ProjectReference Include="..\PixCharge.Domain\PixCharge.Domain.csproj" />
     <ProjectReference Include="..\PixCharge.Repository\PixCharge.Repository.csproj" />
-    <ProjectReference Include="..\PixCharge.SPA\PixCharge.SPA.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <TestDependsOn>
       AfterTest;
     </TestDependsOn>
   </PropertyGroup>
-  <Target Name="Test" AfterTargets="Build;Rebuild" DependsOnTargets="$(TestDependsOn)" Condition="'$(MSBuildRuntimeType)' == 'Core'" />  
+  <Target Name="Test" AfterTargets="Build;Rebuild" DependsOnTargets="$(TestDependsOn)" />
   <Target Name="AfterTest">
-    <Exec Command="powershell -File .\coverage_report.ps1" />
+    <!-- Check if OS is Windows -->
+    <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell -File .\coverage_report.ps1" />
   </Target>
-
 </Project>

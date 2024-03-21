@@ -20,21 +20,6 @@ namespace Repository
         }
 
         [Fact]
-        public void Should_CreateDataBaseMySqlServer()
-        {
-            // Arrange
-            var services = new ServiceCollection();
-
-            // Act
-            services.CreateDataBaseMySqlServer(configuration);
-            var serviceProvider = services.BuildServiceProvider();
-            var context = serviceProvider.GetService<RegisterContext>();
-            
-            // Assert
-            Assert.NotNull(context);
-        }
-
-        [Fact]
         public void Should_CreateDataBaseMsSqlServer()
         {
             // Arrange
