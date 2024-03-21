@@ -22,14 +22,14 @@ public class TransactionMapTest
 
             var model = builder.Model;
             var entityType = model.FindEntityType(typeof(Transaction));
-            var propsCount = entityType.GetNavigations().Count() + entityType.GetProperties().Count();
+            var propsCount = entityType?.GetNavigations().Count() + entityType?.GetProperties().Count();
 
             // Act
-            var idProperty = entityType.FindProperty("Id");
-            var dtTransactionProperty = entityType.FindProperty("DtTransaction");
-            var descriptionProperty = entityType.FindProperty("Description");
-            var customerNavigation = entityType.FindNavigation("Customer");
-            var monetaryValueProperty = entityType.FindNavigation("Value").ForeignKey.Properties.First();
+            var idProperty = entityType?.FindProperty("Id");
+            var dtTransactionProperty = entityType?.FindProperty("DtTransaction");
+            var descriptionProperty = entityType?.FindProperty("Description");
+            var customerNavigation = entityType?.FindNavigation("Customer");
+            var monetaryValueProperty = entityType?.FindNavigation("Value")?.ForeignKey.Properties.First();
 
             // Assert
             Assert.NotNull(idProperty);

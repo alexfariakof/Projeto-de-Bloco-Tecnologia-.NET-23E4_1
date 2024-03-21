@@ -1,5 +1,7 @@
+using PixCharge.Api.CommonInjectDependence;
 using PixCharge.Repository.Data;
 using PixCharge.Repository.DependencyInjection;
+using PixCharge.Application.CommonInjectDependence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,19 @@ builder.Services.AddSwaggerGen(c =>
             Version = "1.0.0"
         });
 });
+
+// Autorization Configuratons
+builder.Services.AddAuthConfigurations(builder.Configuration);
+
+// AutoMapper
+builder.Services.AddAutoMapper();
+
+//Repositories
+builder.Services.AddRepositories();
+
+//Services
+builder.Services.AddServices();
+
 
 var app = builder.Build();
 

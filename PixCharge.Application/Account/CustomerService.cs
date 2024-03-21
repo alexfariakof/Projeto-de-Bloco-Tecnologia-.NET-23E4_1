@@ -2,6 +2,7 @@
 using PixCharge.Application.Account.Dto;
 using PixCharge.Application.Account.Interfaces;
 using PixCharge.Domain.Account.Aggregates;
+using PixCharge.Domain.Account.Agreggates;
 using PixCharge.Domain.Account.ValueObject;
 using PixCharge.Domain.Core.Aggregates;
 using PixCharge.Domain.Core.Interfaces;
@@ -18,23 +19,25 @@ public class CustomerService : ServiceBase<CustomerDto, Customer>, IService<Cust
     }
     public override CustomerDto Create(CustomerDto dto)
     {
-        if (this.Repository.Exists(x => x.Login != null && x.Login.Email == dto.Email))
+        if (this.Repository.Exists(x => x.User.Login != null && x.User.Login.Email == dto.Email))
             throw new ArgumentException("Usuário já existente na base.");
 
 
         Customer customer = new()
         {
             Id = Guid.NewGuid(),
-            Name = dto.Name,
-            CPF = dto.CPF,
+            Name = dto.Name ?? throw new ArgumentException("Nome não pode ser nulo!"),
+            CPF = dto.CPF ?? throw new ArgumentException("CPF não pode ser nulo!"),
             Birth = dto.Birth,
-            Phone = dto.Phone,
-            Login = new()
+            Phone = dto.Phone ?? throw new ArgumentException("Telefone não pode ser nulo!"),
+            User = new User
             {
-                Email = dto.Email ?? "",
-                Password = dto.Password ?? ""
+                Login = new()
+                {
+                    Email = dto.Email ?? throw new ArgumentException("Email não pode ser nulo!"),
+                    Password = dto.Password ?? throw new ArgumentException("Password não pode ser nulo!")
+                }
             }
-
         };
 
         Address address = this.Mapper.Map<Address>(dto.Address);

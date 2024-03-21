@@ -10,7 +10,7 @@ public class TransactionMap : IEntityTypeConfiguration<Transaction>
         builder.ToTable(nameof(Transaction));
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.Property(x => x.DtTransaction).IsRequired();
+        builder.Property(x => x.DtTransaction).IsRequired().ValueGeneratedOnAdd();
         builder.Property(x => x.Description).IsRequired().HasMaxLength(50);
 
         builder.HasOne(x => x.Customer)

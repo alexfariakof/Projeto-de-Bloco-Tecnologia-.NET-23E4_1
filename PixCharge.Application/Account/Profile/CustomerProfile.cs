@@ -8,11 +8,11 @@ public class CustomerProfile : AutoMapper.Profile
     public CustomerProfile() 
     {
         CreateMap<CustomerDto, Customer>()
-            .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => new Phone(src.Phone)))
+            .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => new Phone(src.Phone ?? String.Empty)))
             .ReverseMap();
 
         CreateMap<Customer, CustomerDto>()
-            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Login.Email))
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Login.Email))
             .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone.Number))
             .AfterMap((s, d) =>
             {
