@@ -30,5 +30,8 @@ public class CustomerDto
 
     [Required]
     public AddressDto? Address { get; set; }
+    
+    [Required]
+    public Guid FlatId { get; set; }
 
 }

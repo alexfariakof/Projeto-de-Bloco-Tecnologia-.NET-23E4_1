@@ -6,21 +6,20 @@ using PixCharge.Domain.Transactions.ValueObject;
 namespace PixCharge.Domain.Transactions.Aggregates;
 public class PIX : BaseModel
 {
-
     public Guid CorrelationId { get; set; }
     public DateTime Date { get; set; }
-    public Status Status { get; set; }
-    public Customer Customer { get; set; }
-    public Monetary Monetary { get; set; }
-    public string Description { get; set; }
-    public QRCode QrCode { get; set; } = new QRCode();
-    public List<Transaction> Transactions { get; set; } = new List<Transaction>();
+    public Status Status { get; set; } = 0;
+    public virtual Customer Customer { get; set; } = new();
+    public virtual Guid CustomerId { get; set; }
+    public Monetary Value { get; set; } = 0;
+    public string Description { get; set; } = String.Empty;
+    public virtual QRCode QrCode { get; set; } = new();
+    public virtual IList<Transaction> Transactions { get; set; } = new List<Transaction>();
+    public PIX() { }
     public PIX(Customer custumer)
     {
         Id = Guid.NewGuid();
         CorrelationId = custumer.Id;
         Customer = custumer;
     }
-
-
 }

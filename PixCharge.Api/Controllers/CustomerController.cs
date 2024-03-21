@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PixCharge.Application;
 using PixCharge.Application.Account.Dto;
 
-namespace WebApi.Controllers;
+namespace PixCharge.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]

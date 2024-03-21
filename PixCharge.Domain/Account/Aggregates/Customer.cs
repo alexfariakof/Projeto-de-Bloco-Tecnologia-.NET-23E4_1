@@ -1,18 +1,13 @@
 ﻿using PixCharge.Domain.Transactions.Aggregates;
-using System.Text.Json.Serialization;
 
 namespace PixCharge.Domain.Account.Aggregates;
 public class Customer : AbstractAccount<Customer>
 {
-    public Guid? CorrelationID { get; set; }
-    public string? TaxID { get; set; }
-    public string? Email { get; set; }
-    
-    [JsonIgnore]
-    public List<Transaction> Transactions { get; set; } = new List<Transaction>();
-
-    [JsonIgnore] 
-    public List<Charge> Charges { get; set; } = new List<Charge>();
+    public Guid CorrelationID { get; set; }
+    public string TaxID { get; set; } = String.Empty;
+    public string Email { get; set; } = String.Empty;
+    public virtual IList<Transaction> Transactions { get; set; } = new List<Transaction>();
+    public virtual IList<Charge> Charges { get; set; } = new List<Charge>();
     public override void CreateAccount(Customer customer)
     {        
         this.Name = customer.Name;
@@ -20,6 +15,6 @@ public class Customer : AbstractAccount<Customer>
         this.Birth = customer.Birth;
         this.Phone = customer.Phone;
         this.Address = customer.Address;
-        this.Login = customer.Login;
+        this.User = customer.User;
     }
 }

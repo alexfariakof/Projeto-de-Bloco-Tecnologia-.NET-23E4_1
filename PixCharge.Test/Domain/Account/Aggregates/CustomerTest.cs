@@ -17,6 +17,6 @@ public class CustomerTest
         Assert.Equal(customerMock.Birth, customer.Birth);
         Assert.Equal(customerMock.Phone, customer.Phone);
         Assert.Equal(customerMock.Address, customer.Address);
-        Assert.Equal(customerMock.Login, customer.Login);
+        Assert.Equal(customerMock.User.Login, customer.User.Login);
     }
 }

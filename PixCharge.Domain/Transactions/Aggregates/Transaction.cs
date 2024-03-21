@@ -7,7 +7,7 @@ public class Transaction : BaseModel
 {
     public Guid? CorrelationId { get; set; }
     public DateTime DtTransaction { get; set; }
-    public Monetary Value { get; set; }
-    public string Description { get; set; }
-    public Customer Customer { get; set; }
+    public Monetary Value { get; set; } = 0;
+    public string Description { get; set; } = String.Empty;
+    public Customer Customer { get; set; } = new();
 }

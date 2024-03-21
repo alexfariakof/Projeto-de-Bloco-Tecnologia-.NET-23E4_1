@@ -12,7 +12,7 @@ public static class MockCustomer
             .RuleFor(c => c.Email, f => f.Person.Email)
             .RuleFor(c => c.CorrelationID, new Guid())
             .RuleFor(c => c.TaxID, new Guid().ToString())
-            .RuleFor(c => c.Login, MockLogin.GetFaker())
+            .RuleFor(c => c.User, MockUser.Instance.GetFaker())
             .RuleFor(c => c.CPF, f => f.Person.Cpf())
             .RuleFor(c => c.Birth, f => f.Person.DateOfBirth)
             .RuleFor(c => c.Phone, MockPhone.GetFaker())

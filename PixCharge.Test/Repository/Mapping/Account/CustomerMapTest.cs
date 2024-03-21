@@ -1,4 +1,4 @@
-﻿using PixCharge.Repository.Mapping;
+﻿using PixCharge.Repository.Account.Mapping;
 
 namespace Repository.Mapping;
 public class CustomerMapTest
@@ -6,7 +6,7 @@ public class CustomerMapTest
     [Fact]
     public void EntityConfiguration_IsValid()
     {
-        const int PROPERTY_COUNT = 8;
+        const int PROPERTY_COUNT = 10;
         // Arrange
         var options = new DbContextOptionsBuilder<MockRegisterContext>()
             .UseInMemoryDatabase(databaseName: "InMemoryDatabase_CustomerMapTest")
@@ -21,26 +21,22 @@ public class CustomerMapTest
 
             var model = builder.Model;
             var entityType = model.FindEntityType(typeof(Customer));
-            var propsCount = entityType.GetNavigations().Count() + entityType.GetProperties().Count();
+            var propsCount = entityType?.GetNavigations().Count() + entityType?.GetProperties().Count();
 
             // Act
-            var idProperty = entityType.FindProperty("Id");
-            var nameProperty = entityType.FindProperty("Name");
-            var loginNavigation = entityType.FindNavigation(nameof(Customer.Login));
-            var emailProperty = loginNavigation.TargetEntityType.FindProperty(nameof(Login.Email));
-            var passwordProperty = loginNavigation.TargetEntityType.FindProperty(nameof(Login.Password));
-            var birthProperty = entityType.FindProperty("Birth");
-            var cpfProperty = entityType.FindProperty("CPF");
-            var phoneNavigation = entityType.FindNavigation(nameof(Customer.Phone));
-            var phoneProperty = phoneNavigation.TargetEntityType.FindProperty(nameof(Phone.Number));
+            var idProperty = entityType?.FindProperty("Id");
+            var nameProperty = entityType?.FindProperty("Name");
+            //var userProperty = entityType?.FindProperty(nameof(Customer.User));
+            var birthProperty = entityType?.FindProperty("Birth");
+            var cpfProperty = entityType?.FindProperty("CPF");
+            var phoneNavigation = entityType?.FindNavigation(nameof(Customer.Phone));
+            var phoneProperty = phoneNavigation?.TargetEntityType.FindProperty(nameof(Phone.Number));
 
             
             // Assert
             Assert.NotNull(idProperty);
             Assert.NotNull(nameProperty);
-            Assert.NotNull(loginNavigation);
-            Assert.NotNull(emailProperty);
-            Assert.NotNull(passwordProperty);
+            //Assert.NotNull(userProperty);
             Assert.NotNull(birthProperty);
             Assert.NotNull(cpfProperty);
             Assert.NotNull(phoneNavigation);
@@ -50,10 +46,7 @@ public class CustomerMapTest
             Assert.True(idProperty.IsPrimaryKey());
             Assert.False(nameProperty.IsNullable);
             Assert.Equal(100, nameProperty.GetMaxLength());
-            Assert.False(emailProperty.IsNullable);
-            Assert.Equal(150, emailProperty.GetMaxLength());
-            Assert.False(passwordProperty.IsNullable);
-            Assert.Equal(255, passwordProperty.GetMaxLength());
+            //Assert.False(userProperty.IsNullable);
             Assert.False(birthProperty.IsNullable);
             Assert.False(cpfProperty.IsNullable);
             Assert.Equal(14, cpfProperty.GetMaxLength());

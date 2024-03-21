@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using PixCharge.Application;
 using PixCharge.Application.Transactions.Dto;
 
-namespace WebApi.Controllers;
+namespace PixCharge.Api.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -55,43 +55,4 @@ public class ChargeController : Controller
         }
     }
 
-    [HttpPut]
-    [ProducesResponseType((200), Type = typeof(ChargeDto))]
-    [ProducesResponseType((400), Type = typeof(string))]
-    public IActionResult Update(ChargeDto dto)
-    {
-        
-        if (ModelState is { IsValid: false })
-            return BadRequest();
-
-        try
-        {
-            var result = this._ChargeService.Update(dto);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
-
-    [HttpDelete]
-    [ProducesResponseType((200), Type = typeof(bool))]
-    [ProducesResponseType((400), Type = typeof(string))]
-
-    public IActionResult Delete(ChargeDto dto)
-    {
-        if (ModelState is { IsValid: false })
-            return BadRequest();
-
-        try
-        {
-            var result = this._ChargeService.Delete(dto);
-            return Ok(result);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }    
 }

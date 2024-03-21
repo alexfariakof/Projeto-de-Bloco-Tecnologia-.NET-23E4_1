@@ -12,10 +12,7 @@ namespace PixCharge.Application.Transactions;
 public class ChargeService : ServiceBase<ChargeDto, Charge>, IService<ChargeDto>, IChargeService
 {
     private const int INTERVAL_TRANSACTON_PIX = -4;
-    public ChargeService(IMapper mapper, IRepository<Charge> chargeRepository) : base(mapper, chargeRepository)
-    {
-
-    }
+    public ChargeService(IMapper mapper, IRepository<Charge> chargeRepository) : base(mapper, chargeRepository) { }
 
 
     public void CreateTransaction(PIX pix, Monetary value, string description = "")
@@ -33,13 +30,13 @@ public class ChargeService : ServiceBase<ChargeDto, Charge>, IService<ChargeDto>
         transaction = ValidateTransaction(transaction, pix.Customer) ?? transaction;
 
         IPix chargePix = new OpenPix();
-        var charge = chargePix.CreateCharge(value, transaction.CorrelationId.Value.ToString());
+        var charge = chargePix.CreateCharge(value, transaction?.CorrelationId.ToString() ?? Guid.NewGuid().ToString());
 
         //pix.Status = charge.Status;
         pix.QrCode.Url = charge.QrCodeImage;
         pix.QrCode.BrCode = charge.BrCode;
 
-        if (transaction.Id.ToString().Equals("00000000-0000-0000-0000-000000000000"))
+        if (transaction.Id.Equals(Guid.Empty))
         {
             transaction.Id = Guid.NewGuid();
             pix.Customer.Transactions.Add(transaction);
@@ -71,7 +68,7 @@ public class ChargeService : ServiceBase<ChargeDto, Charge>, IService<ChargeDto>
         throw new NotImplementedException();
     }
 
-    private Transaction ValidateTransaction(Transaction transaction, Customer customer)
+    private Transaction? ValidateTransaction(Transaction transaction, Customer customer)
     {
         var lastTransactions = customer.Transactions.Where(t => t.DtTransaction > DateTime.Now.AddMinutes(INTERVAL_TRANSACTON_PIX) && t.Value.Equals(transaction.Value));
         if (lastTransactions?.Count() >= 1)

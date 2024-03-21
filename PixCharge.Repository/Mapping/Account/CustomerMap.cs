@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace PixCharge.Repository.Mapping;
+namespace PixCharge.Repository.Account.Mapping;
 public class CustomerMap : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
@@ -20,15 +20,10 @@ public class CustomerMap : IEntityTypeConfiguration<Customer>
             c.Property(x => x.Number).HasColumnName("Phone").HasMaxLength(50).IsRequired();
 
         });
-
-        builder.OwnsOne(e => e.Login, c =>
-        {
-            c.Property(x => x.Email).HasColumnName("Email").HasMaxLength(150).IsRequired();
-            c.Property(x => x.Password).HasColumnName("Password").HasMaxLength(255).IsRequired();
-        });
-
-        builder.HasMany(x => x.Charges).WithOne(c => c.Customer);
-        builder.HasMany(x => x.Transactions).WithOne(x => x.Customer);
-
+        
+        builder.HasOne(x => x.Address);
+        builder.HasMany(x => x.Flats).WithOne(c => c.Customer).OnDelete(DeleteBehavior.NoAction);
+        builder.HasMany(x => x.Charges).WithOne(c => c.Customer).OnDelete(DeleteBehavior.NoAction);
+        builder.HasMany(x => x.Transactions).WithOne(x => x.Customer).OnDelete(DeleteBehavior.NoAction);
     }
 }

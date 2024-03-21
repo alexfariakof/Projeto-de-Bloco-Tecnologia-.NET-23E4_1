@@ -27,11 +27,11 @@ public class Crypto : ICrypto
     private Crypto()
     {
         var key = getHashKey();
-        var keyByte = Convert.FromBase64String(key);
+        var keyByte = Convert.FromBase64String(key ?? throw new ArgumentException("HashKey is Null!"));
         Key = keyByte;
     }
 
-    private string getHashKey()
+    private string? getHashKey()
     {
         var jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
 

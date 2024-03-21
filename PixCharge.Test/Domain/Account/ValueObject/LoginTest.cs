@@ -8,29 +8,29 @@ public class LoginTest
         var customer = MockCustomer.GetFaker();
 
         // Act
-        customer.Login.Email = "usuario@teste.com";
+        customer.User.Login.Email = "usuario@teste.com";
 
         // Assert
-        Assert.Equal("usuario@teste.com", customer.Login.Email);
+        Assert.Equal("usuario@teste.com", customer.User.Login.Email);
     }
 
     [Fact]
     public void Should_Throws_Erro_With_Invalid_Email()
     {
         // Arrange
-        var merchant = MockCustomer.GetFaker();
+        var customer = MockCustomer.GetFaker();
 
         // Act & Assert
-        Assert.Throws<ArgumentException>(() => merchant.Login.Email = "Email inválido!");
+        Assert.Throws<ArgumentException>(() => customer.User.Login.Email = "Email inválido!");
     }
             
     [Fact]
     public void Should_Throws_Erro_With_Long_Email()
     {
         // Arrange
-        var merchant = MockCustomer.GetFaker();
+        var cutomer = MockCustomer.GetFaker();
 
         // Act e Assert
-        Assert.Throws<ArgumentException>(() => merchant.Login.Email = new string('a', 257));
+        Assert.Throws<ArgumentException>(() => cutomer.User.Login.Email = new string('a', 257));
     }
 }
