@@ -6,16 +6,10 @@ using PixCharge.Repository.Data;
 namespace PixCharge.Repository.DependencyInjection;
 public static class DataBaseDependencyInjection
 {
-    public static void CreateDataBaseMySqlServer(this IServiceCollection services, IConfiguration configuration)
-    {
-        services.AddDbContext<RegisterContext>(options =>
-            options.UseMySQL(configuration.GetConnectionString("MySqlConnectionString"),
-                b => b.MigrationsAssembly("PixCharge.Infrastructure.Migrations_MySqlServer")));
-    }
     public static void CreateDataBaseMsSqlServer(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<RegisterContext>(options =>
-        options.UseSqlServer(configuration.GetConnectionString("SqlServerConnectionString"),
+        options.UseSqlServer(configuration.GetConnectionString("MsSqlServerConnectionString"),
             b => b.MigrationsAssembly("PixCharge.Infrastructure.Migrations_MsSqlServer")));
 
     }

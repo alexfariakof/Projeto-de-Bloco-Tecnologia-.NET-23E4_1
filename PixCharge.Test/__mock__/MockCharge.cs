@@ -30,4 +30,16 @@ public static class MockCharge
 
         return fakeCharge ?? null;
     }
+
+    public static List<Charge> GetListFaker(int count)
+    {
+        var chargeList = new List<Charge>();
+        for (var i = 0; i < count; i++)
+        {
+            chargeList.Add(GetFaker());
+        }
+        return chargeList;
+
+    }
+
 }

@@ -3,7 +3,7 @@ cls
 # Pasta onde o relatário será gerado
 $baseDirectory = Join-Path -Path (Get-Location) -ChildPath ""
 $projectTestPath = Join-Path -Path (Get-Location) -ChildPath "PixCharge.Test"
-$sourceDirs = "$baseDirectory\PixCharge.Business;$baseDirectory\PixCharge.Domain;$baseDirectory\PixCharge.Repository;$baseDirectory\PixCharge.SPA"
+$sourceDirs = "$baseDirectory\PixCharge.Api;$baseDirectory\PixCharge.Application;$baseDirectory\PixCharge.Domain;$baseDirectory\PixCharge.Repository;"
 $reportPath = Join-Path -Path (Get-Location) -ChildPath "PixCharge.Test\TestResults"
 $coverageXmlPath = Join-Path -Path $reportPath -ChildPath "coveragereport"
 

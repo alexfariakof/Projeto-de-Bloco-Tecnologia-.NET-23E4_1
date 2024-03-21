@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 namespace PixCharge.Integration.Adapter.Plataform.OpenPix;
 public class OpenPix : IPix
 {
-    private const string baseUrl = "https://api.openpix.com.br/api/v1/";
+    private readonly string baseUrl = "https://api.openpix.com.br/api/v1/";
     private string Authorization = null;
     public Charge CreateCharge(decimal value, string correlationID)
     {

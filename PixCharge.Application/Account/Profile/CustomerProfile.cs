@@ -1,0 +1,24 @@
+﻿using PixCharge.Application.Account.Dto;
+using PixCharge.Domain.Account.ValueObject;
+using PixCharge.Domain.Account.Aggregates;
+
+namespace PixCharge.Application.Account.Profile;
+public class CustomerProfile : AutoMapper.Profile
+{
+    public CustomerProfile() 
+    {
+        CreateMap<CustomerDto, Customer>()
+            .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => new Phone(src.Phone)))
+            .ReverseMap();
+
+        CreateMap<Customer, CustomerDto>()
+            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Login.Email))
+            .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone.Number))
+            .AfterMap((s, d) =>
+            {
+                d.Password = "********";
+            });
+        
+        CreateMap<AddressDto, Address>().ReverseMap();
+    }
+}

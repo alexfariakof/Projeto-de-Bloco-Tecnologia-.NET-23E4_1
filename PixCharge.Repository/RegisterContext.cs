@@ -8,6 +8,7 @@ public class RegisterContext: DbContext
 {
     public RegisterContext(DbContextOptions<RegisterContext> options) : base(options) { }
     public DbSet<Customer> Customer { get; set; }
+    public DbSet<Charge> Charge{ get; set; }
     public DbSet<Transaction> Transaction { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
